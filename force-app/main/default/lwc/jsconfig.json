@@ -3,17 +3,14 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/approvalHistory": [
+                "approvalHistory/approvalHistory.js"
+            ],
             "c/lookup": [
                 "lookup/lookup.js"
             ],
             "c/modal": [
                 "modal/modal.js"
-            ],
-            "c/approvalHistory": [
-                "approvalHistory/approvalHistory.js"
-            ],
-            "c/testImplementation": [
-                "testImplementation/testImplementation.js"
             ]
         }
     },
