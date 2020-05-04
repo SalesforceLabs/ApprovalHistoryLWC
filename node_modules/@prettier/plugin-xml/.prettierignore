@@ -1,0 +1,9 @@
+/.github/
+/coverage/
+/.eslintcache
+/.*ignore
+/yarn.lock
+/LICENSE
+
+/test/fixture.xml
+/test/__snapshots__/*

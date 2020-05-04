@@ -1,0 +1,117 @@
+<template>
+  <div>
+    <lightning-card>
+      <h3 slot="title">
+        <lightning-icon
+          icon-name="standard:approval"
+          size="small"
+        ></lightning-icon>
+        <a
+          class="slds-card__header-link slds-p-left_medium"
+          if:true={approvalHistory}
+          >Approval History ({approvalHistory.approvalStepsSize})</a
+        >
+      </h3>
+      <div slot="actions" if:true={approvalHistory}>
+        <lightning-button
+          data-id="SubmitForApproval"
+          label="Submit for Approval"
+          if:true={showSubmitForApprovalButton}
+          onclick={handleSubmitForApprovalClick}
+        ></lightning-button>
+        <lightning-button
+          data-id="Approve"
+          label="Approve"
+          if:true={approvalHistory.isCurrentUserApprover}
+          onclick={handleApproveClick}
+        ></lightning-button>
+        <lightning-button
+          data-id="Reject"
+          label="Reject"
+          if:true={approvalHistory.isCurrentUserApprover}
+          onclick={handleRejectClick}
+        ></lightning-button>
+        <lightning-button-menu
+          alternative-text="Show menu"
+          if:true={showButtonMenu}
+        >
+          <lightning-menu-item
+            data-id="Reassign"
+            value="Reassign"
+            label="Reassign"
+            if:true={approvalHistory.isCurrentUserApprover}
+            onclick={handleReassignClick}
+          ></lightning-menu-item>
+          <lightning-menu-item
+            data-id="Recall"
+            value="Recall"
+            label="Recall"
+            if:true={approvalHistory.showRecall}
+            onclick={handleRecallClick}
+          ></lightning-menu-item>
+        </lightning-button-menu>
+      </div>
+      <template if:true={showDataTable}>
+        <lightning-datatable
+          key-field="id"
+          data={approvalHistory.approvalSteps}
+          columns={columns}
+          hide-checkbox-column
+          class="myApprovalHistoryTable"
+        ></lightning-datatable>
+        
+      </template>
+      <template if:true={showDataTable}>
+        <!-- needed to use the footer class because the tob bar looked weird with the datatable component on top-->
+        <center>
+          <p  class="slds-p-around_large">
+            <lightning-formatted-url
+              value={viewAllUrl}
+              label="View All"
+            ></lightning-formatted-url>
+          </p>  
+        </center>
+        
+      </template>
+                      
+
+      <c-modal data-id="submitForApproval" onclosedialog={handleModalCancel}>
+        <div slot="header">{modalTitle}</div>
+        <div class="slds-form-element" if:true={showCommentModal}>
+          <lightning-input
+            data-id="comment"
+            type="text"
+            label="Comments"
+            value=""
+          ></lightning-input>
+        </div>
+        <div class="slds-form-element lookup-form" if:true={showLookupModal}>
+          <c-lookup
+            errors={lookupErrors}
+            onsearch={handleLookupSearch}
+            onselectionchange={handleSelectionChange}
+            label={lookupLabel}
+            placeholder="Search Users..."
+            is-multi-entry={isMultiEntry}
+            required
+          >
+          </c-lookup>
+        </div>
+        <div slot="footer">
+          <lightning-button
+            data-id="Cancel"
+            label="Cancel"
+            onclick={handleModalCancel}
+          ></lightning-button>
+          <lightning-button
+            data-id="Submit"
+            label={modalsubmitLabel}
+            variant="brand"
+            class="slds-p-left_small"
+            onclick={handleModalSubmit}
+          ></lightning-button>
+        </div>
+      </c-modal>
+    </lightning-card>
+  </div>
+</template>

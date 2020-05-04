@@ -1,0 +1,24 @@
+{
+  "approvalSteps": [
+    {
+      "stepName": "Name",
+      "stepUrl": "URL",
+      "createdDate": "11/24/20",
+      "stepStatus": "Status",
+      "assignedTo": "Test Name",
+      "assignedToUrl": "test.url"
+    },
+    {
+      "stepName": "Name",
+      "stepUrl": "URL",
+      "createdDate": "11/24/20",
+      "stepStatus": "Status",
+      "assignedTo": "Test Name",
+      "assignedToUrl": "test.url"
+    }
+  ],
+  "approvalStepsSize": 3,
+  "isCurrentUserApprover": true,
+  "showRecall": true,
+  "showSubmitForApproval": true
+}
