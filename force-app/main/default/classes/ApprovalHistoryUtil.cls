@@ -22,7 +22,7 @@ public with sharing class ApprovalHistoryUtil {
         //verify current user's profile has modify all of the current object permission
         String objType = recordId.getsobjecttype().getDescribe().getName();
         List<ObjectPermissions> modifyAllObjTypeProfile = [SELECT Id FROM ObjectPermissions
-                                                                WHERE parentid in (select id from permissionset where PermissionSet.Profile.Id =: profileId ) 
+                                                                WHERE parentid in (SELECT Id FROM permissionset WHERE PermissionSet.Profile.Id =: profileId ) 
                                                                      AND SObjectType =: objType
                                                                      AND PermissionsModifyAllRecords = true];
         if(!modifyAllObjTypeProfile.isEmpty() && !Test.isRunningTest()){
@@ -37,7 +37,7 @@ public with sharing class ApprovalHistoryUtil {
         }
 
         //verify current user's permission set has modify all of the current object permission
-        List<ObjectPermissions> modifyAllObjTypePermSets = [SELECT Id,parentid FROM ObjectPermissions
+        List<ObjectPermissions> modifyAllObjTypePermSets = [SELECT Id, parentid FROM ObjectPermissions
                                                                 WHERE SObjectType =: objType
                                                                 AND PermissionsModifyAllRecords = true];
         Set<Id> permSets = new Set<Id>();

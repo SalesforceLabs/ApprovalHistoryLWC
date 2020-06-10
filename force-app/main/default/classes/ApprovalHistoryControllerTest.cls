@@ -12,7 +12,7 @@ private class ApprovalHistoryControllerTest {
     }
 
     @isTest static void searchUsersNotEmptyListTest(){
-        List<User> users = [select Id, FirstName, LastName FROM User LIMIT 1];
+        List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
         Id [] fixedSearchResults= new Id[1];
         fixedSearchResults[0] = users.get(0).Id;
         Test.setFixedSearchResults(fixedSearchResults);
@@ -29,7 +29,7 @@ private class ApprovalHistoryControllerTest {
     }
 
     @isTest static void submitForApprovalWithNextApproverTest(){
-        List<User> users = [select Id, FirstName, LastName FROM User LIMIT 1];
+        List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
         List<Account> accounts = [SELECT Id FROM Account LIMIT 1];
         try{
             ApprovalHistoryController.submitForApproval(accounts.get(0).Id, 'string comments', users.get(0).Id);
@@ -52,7 +52,7 @@ private class ApprovalHistoryControllerTest {
 
     @isTest static void reassignStepTest(){
         try{
-            List<User> users = [select Id, FirstName, LastName FROM User LIMIT 1];
+            List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
             List<Account> accounts = [SELECT Id FROM Account LIMIT 1];
             ApprovalHistoryController.reassignStep(accounts.get(0).Id,users.get(0).Id );
         }catch(Exception e){

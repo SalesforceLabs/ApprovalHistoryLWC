@@ -45,7 +45,7 @@ private class ApprovalHistoryUtilTest {
     }
 
     @isTest static void reassignStepTest(){
-        List<User> users = [select Id, FirstName, LastName FROM User LIMIT 1];
+        List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
         List<ProcessInstanceWorkitem> workItems = new List<ProcessInstanceWorkitem>();
         workItems.add(new ProcessInstanceWorkitem(Id = '04i3h000001L5fGAAS'));
         try{
@@ -63,7 +63,7 @@ private class ApprovalHistoryUtilTest {
     }
 
     @isTest static void populateApprovalHistoryRecord(){
-        List<User> users = [select Id, FirstName, LastName FROM User LIMIT 1];
+        List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
         List<ApprovalHistoryController.ApprovalHistoryStep> approvalSteps = new List<ApprovalHistoryController.ApprovalHistoryStep>();
         approvalSteps.add(new ApprovalHistoryController.ApprovalHistoryStep( 'stepName','stepId', DateTime.now(),'stepStatus', 'assignedTo', 'assignedToId'));
         ApprovalHistoryController.ApprovalHistory approvalHistoryToReturn = new ApprovalHistoryController.ApprovalHistory( approvalSteps,  false, true, true);
