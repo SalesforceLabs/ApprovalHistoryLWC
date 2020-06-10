@@ -1,9 +1,9 @@
 public with sharing class ApprovalHistoryUtil {
-    public static final string STATUS_SUBMITTED = 'Submitted';
-    public static final string STATUS_STARTED = 'Started';
-    public static final string STATUS_PENDING = 'Pending';
-    public static final string STATUS_RECALLED = 'Recalled';
-    public static final string STATUS_REMOVED = 'Removed';
+    public static final String STATUS_SUBMITTED = 'Submitted';
+    public static final String STATUS_STARTED = 'Started';
+    public static final String STATUS_PENDING = 'Pending';
+    public static final String STATUS_RECALLED = 'Recalled';
+    public static final String STATUS_REMOVED = 'Removed';
  
     public static final Id currentUserId = UserInfo.getUserId();
 
@@ -20,7 +20,7 @@ public with sharing class ApprovalHistoryUtil {
         }
 
         //verify current user's profile has modify all of the current object permission
-        string objType = recordId.getsobjecttype().getDescribe().getName();
+        String objType = recordId.getsobjecttype().getDescribe().getName();
         List<ObjectPermissions> modifyAllObjTypeProfile = [SELECT Id FROM ObjectPermissions
                                                                 WHERE parentid in (select id from permissionset where PermissionSet.Profile.Id =: profileId ) 
                                                                      AND SObjectType =: objType
@@ -55,7 +55,7 @@ public with sharing class ApprovalHistoryUtil {
         return false;
     }
 
-    public static ApprovalHistoryController.ApprovalHistory populateApprovalHistorySteps(List<ProcessInstance> processInstances, string recordId){
+    public static ApprovalHistoryController.ApprovalHistory populateApprovalHistorySteps(List<ProcessInstance> processInstances, String recordId){
         boolean isCurrentUserAdmin = ApprovalHistoryUtil.isCurrentUserSystemAdmin(recordId);
         boolean isCurrentUserApprover = false;
         boolean isSubmitForApproval = true;
@@ -90,7 +90,7 @@ public with sharing class ApprovalHistoryUtil {
 
     } 
 
-    public static String processStep(List<ProcessInstanceWorkitem> workItems, string comments,string nextApproverId, string action){
+    public static String processStep(List<ProcessInstanceWorkitem> workItems, String comments, String nextApproverId, String action){
         if(workItems.isEmpty()){
             return '';
         }
@@ -107,7 +107,7 @@ public with sharing class ApprovalHistoryUtil {
         return JSON.serialize(result); 
     }
 
-    public static void reassignStep(List<ProcessInstanceWorkItem> workItemList, string newActorId){
+    public static void reassignStep(List<ProcessInstanceWorkItem> workItemList, String newActorId){
         if(workItemList.isEmpty()){
             return;
         }
@@ -115,7 +115,7 @@ public with sharing class ApprovalHistoryUtil {
         update workItemList;
     }
 
-    public static void populateApprovalHistoryRecord(ApprovalHistoryController.ApprovalHistory approvalHistoryToReturn,ProcessInstanceHistory step, boolean isCurrentUserAdmin, string submittedById ){
+    public static void populateApprovalHistoryRecord(ApprovalHistoryController.ApprovalHistory approvalHistoryToReturn,ProcessInstanceHistory step, boolean isCurrentUserAdmin, String submittedById ){
         if(step.stepStatus == ApprovalHistoryUtil.STATUS_PENDING || Test.isRunningTest()){
             approvalHistoryToReturn.showSubmitForApproval = false;
             if((step.Actor.Id == ApprovalHistoryUtil.currentUserId || isCurrentUserAdmin) || Test.isRunningTest()){
