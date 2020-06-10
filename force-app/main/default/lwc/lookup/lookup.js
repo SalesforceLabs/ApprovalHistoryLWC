@@ -99,7 +99,7 @@ export default class Lookup extends LightningElement {
     }
     // eslint-disable-next-line @lwc/lwc/no-async-operation
     this.searchThrottlingTimeout = setTimeout(() => {
-      // Send search event if search term is long enougth
+      // Send search event if search term is long enough
       if (this.cleanSearchTerm.length >= MINIMAL_SEARCH_TERM_LENGTH) {
         // Display spinner until results are returned
         this.loading = true;

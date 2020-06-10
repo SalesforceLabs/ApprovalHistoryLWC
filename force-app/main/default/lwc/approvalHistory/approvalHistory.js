@@ -67,8 +67,8 @@ export default class ApprovalHistory extends LightningElement {
   columns = columns;  //columns for datatable
   //modal properties
   currentModalState; //decides which type of modal to display depending on the action happening(approve, reject, recall, etc)
-  modalComment; //temporarely stores the value of the comment input field in the modal
-  selectedUser; //temporarely stores the selected user from the lookup component in the modal
+  modalComment; //temporarily stores the value of the comment input field in the modal
+  selectedUser; //temporarily stores the selected user from the lookup component in the modal
   //end modal properties
 
   //lookup properties
