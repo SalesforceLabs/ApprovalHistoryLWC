@@ -1,8 +1,8 @@
 public with sharing class ApprovalHistoryController {
 
-    public static final string APPROVE_ACTION = 'Approve';
-    public static final string REJECT_ACTION = 'Reject';
-    public static final string RECALL_ACTION = 'Removed';
+    public static final String APPROVE_ACTION = 'Approve';
+    public static final String REJECT_ACTION = 'Reject';
+    public static final String RECALL_ACTION = 'Removed';
 
     
     @AuraEnabled(Cacheable=true)
@@ -44,7 +44,7 @@ public with sharing class ApprovalHistoryController {
     }
 
     @AuraEnabled
-    public static String processStep(string recordId, string comments,string nextApproverId, string action){
+    public static String processStep(String recordId, String comments, String nextApproverId, String action){
         List<ProcessInstanceWorkitem> workItems = [
             SELECT Id, ProcessInstanceId 
             FROM ProcessInstanceWorkitem 
@@ -55,14 +55,14 @@ public with sharing class ApprovalHistoryController {
     }
 
     @AuraEnabled
-    public static void reassignStep(string recordId, string newActorId ){
+    public static void reassignStep(String recordId, String newActorId ){
         List<ProcessInstanceWorkItem> workItemList = [SELECT ActorId FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId = : recordId];
         ApprovalHistoryUtil.reassignStep(workItemList, newActorId);
     }
 
 
     @AuraEnabled
-    public static string submitForApproval(string recordId, string comments, string nextApproverId){
+    public static String submitForApproval(String recordId, String comments, String nextApproverId){
         Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
         req.setComments(comments);
         if(!String.isBlank(nextApproverId)){
@@ -81,7 +81,7 @@ public with sharing class ApprovalHistoryController {
 
 
     @AuraEnabled (cacheable=true)
-    public static ApprovalHistory getApprovalHistory(string recordId){  
+    public static ApprovalHistory getApprovalHistory(String recordId){  
                           
         List<ProcessInstance> processInstances = [SELECT Id,SubmittedById, ProcessDefinition.Name , (SELECT ID, ProcessNodeId,  
                                                             StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending  
@@ -95,25 +95,25 @@ public with sharing class ApprovalHistoryController {
 
     public class ApprovalHistoryStep{
         @AuraEnabled  
-        public string stepName {get;set;}  
+        public String stepName {get;set;}  
         @AuraEnabled  
-        public string stepUrl {get;set;}
+        public String stepUrl {get;set;}
         @AuraEnabled  
         public DateTime createdDate {get;set;}   
         @AuraEnabled  
-        public string stepStatus {get;set;}  
+        public String stepStatus {get;set;}  
         @AuraEnabled  
-        public string assignedTo {get;set;}   
+        public String assignedTo {get;set;}   
         @AuraEnabled  
-        public string assignedToUrl {get;set;}  
+        public String assignedToUrl {get;set;}  
         
         public ApprovalHistoryStep(
-            string stepName,
-            string stepId,
+            String stepName,
+            String stepId,
             DateTime createdDate, 
-            string stepStatus,
-            string assignedTo,
-            string assignedToId )  
+            String stepStatus,
+            String assignedTo,
+            String assignedToId )  
         { 
             this.stepName = stepName;
             this.stepUrl = '/' + stepId;
@@ -136,7 +136,7 @@ public with sharing class ApprovalHistoryController {
         @AuraEnabled
         public List<ApprovalHistoryStep> approvalSteps;
         @AuraEnabled
-        public string approvalStepsSize;
+        public String approvalStepsSize;
         @AuraEnabled 
         public boolean isCurrentUserApprover; 
         @AuraEnabled 
