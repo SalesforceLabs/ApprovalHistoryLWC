@@ -5,5 +5,5 @@ This component has all the functionality of the standard Approval History relate
 If you want to use it in a Record Detail Page, you can use it by just dropping it into the page. 
 
 
-If you want to use it in a Lightning App Page, you will need to use a wrapper component and utilize the component public properties: `recordId`, and `allowSubmitForApproval`. The `recordId` property represents that record whose approval history will be displayed. The `allowSubmitForApproval` property determines if the submit for approval button will show as an action. Also, there is public function `submitForApproval` that triggers the submit for approval action.
+If you want to use it in a Lightning App Page, you will need to use a wrapper component and utilize the component public properties: `recordId`, `allowSubmitForApproval`, and `showComments`. The `recordId` property represents that record whose approval history will be displayed. The `allowSubmitForApproval` property determines if the submit for approval button will show as an action. Also, there is public function `submitForApproval` that triggers the submit for approval action. The `showComments` public property determines if the Comments column will show in the table.
 

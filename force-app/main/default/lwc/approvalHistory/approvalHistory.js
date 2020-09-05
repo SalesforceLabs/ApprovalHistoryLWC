@@ -61,10 +61,11 @@ const columns = [
 ];
 export default class ApprovalHistory extends LightningElement {
   @api recordId;
+  @api showComments; //Determines if the component will show the comments column
   @api allowSubmitForApproval; //determines if the component will allow Submit for Approval functionality
   @track approvalHistory; //approval history to display on page
   wiredApprovalHistory; //property used to refreshApex
-  columns = columns;  //columns for datatable
+
   //modal properties
   currentModalState; //decides which type of modal to display depending on the action happening(approve, reject, recall, etc)
   modalComment; //temporarily stores the value of the comment input field in the modal
@@ -76,6 +77,17 @@ export default class ApprovalHistory extends LightningElement {
   isMultiEntry = false;
   initialSelection = [];
   //end lookup properties
+
+  get columns() {
+    let tempColumns = columns;
+    if(this.showComments){
+      tempColumns.push({
+        label: "Comments", fieldName: "comments" 
+      });
+    } 
+
+    return tempColumns;
+  }
 
   //url that will display all of the approval process history
   get viewAllUrl() {
