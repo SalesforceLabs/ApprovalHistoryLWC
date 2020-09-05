@@ -81,7 +81,7 @@ public with sharing class ApprovalHistoryUtil {
                 }
 
                 populateApprovalHistoryRecord(approvalHistoryToReturn, step,isCurrentUserAdmin,pr.submittedById);
-                steps.add(new ApprovalHistoryController.ApprovalHistoryStep( step.ProcessNode.Name == null ? pr.ProcessDefinition.Name  : step.ProcessNode.Name,step.Id, step.CreatedDate,  step.StepStatus, step.Actor.Name,step.Actor.Id));
+                steps.add(new ApprovalHistoryController.ApprovalHistoryStep( step.ProcessNode.Name == null ? pr.ProcessDefinition.Name  : step.ProcessNode.Name,step.Id, step.CreatedDate,  step.StepStatus, step.Actor.Name,step.Actor.Id, step.Comments));
             }
         } 
 

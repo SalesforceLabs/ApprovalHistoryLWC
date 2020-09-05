@@ -15,6 +15,11 @@
         type="Boolean"
         label="Allow Submit For Approval"
       />
+      <property
+        name="showComments"
+        type="Boolean"
+        label="Show Comments"
+      />
        <supportedFormFactors>
                 <supportedFormFactor type="Small" />
                 <supportedFormFactor type="Large" />

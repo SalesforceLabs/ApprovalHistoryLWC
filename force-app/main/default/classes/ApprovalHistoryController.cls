@@ -105,7 +105,9 @@ public with sharing class ApprovalHistoryController {
         @AuraEnabled  
         public String assignedTo {get;set;}   
         @AuraEnabled  
-        public String assignedToUrl {get;set;}  
+        public String assignedToUrl {get;set;}
+        @AuraEnabled
+        public String comments {get;set;}
         
         public ApprovalHistoryStep(
             String stepName,
@@ -113,13 +115,15 @@ public with sharing class ApprovalHistoryController {
             DateTime createdDate, 
             String stepStatus,
             String assignedTo,
-            String assignedToId )  
+            String assignedToId,
+            String comments )  
         { 
             this.stepName = stepName;
             this.stepUrl = '/' + stepId;
             this.createdDate = createdDate;
             this.assignedTo = assignedTo;  
             this.assignedToUrl = '/'+assignedToId;
+            this.comments = comments;
 
             if(stepStatus == ApprovalHistoryUtil.STATUS_STARTED){
                 this.stepStatus = ApprovalHistoryUtil.STATUS_SUBMITTED;

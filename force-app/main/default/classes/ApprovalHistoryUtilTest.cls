@@ -65,7 +65,7 @@ private class ApprovalHistoryUtilTest {
     @isTest static void populateApprovalHistoryRecord(){
         List<User> users = [SELECT Id, FirstName, LastName FROM User LIMIT 1];
         List<ApprovalHistoryController.ApprovalHistoryStep> approvalSteps = new List<ApprovalHistoryController.ApprovalHistoryStep>();
-        approvalSteps.add(new ApprovalHistoryController.ApprovalHistoryStep( 'stepName','stepId', DateTime.now(),'stepStatus', 'assignedTo', 'assignedToId'));
+        approvalSteps.add(new ApprovalHistoryController.ApprovalHistoryStep( 'stepName','stepId', DateTime.now(),'stepStatus', 'assignedTo', 'assignedToId', 'Comments'));
         ApprovalHistoryController.ApprovalHistory approvalHistoryToReturn = new ApprovalHistoryController.ApprovalHistory( approvalSteps,  false, true, true);
         ProcessInstanceHistory step = new ProcessInstanceHistory();
         ApprovalHistoryUtil.populateApprovalHistoryRecord(approvalHistoryToReturn, step,  true, users.get(0).Id );
